@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 import environ
 
@@ -43,7 +44,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+REST_USER_JWT = True
+
+SIMPLE_JWT = {
+    # access token이 유효한 기간을 지정하는 datetime.timedelta 객체
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    # refresh token이 유효한 기간을 지정하는 datetime.timedelta 객체
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    # True로 설정할 경우, refresh token을 보내면 새로운 access token과 refresh token이 반환된다.
+    'ROTATE_REFRESH_TOKENS': False,
+    # True로 설정될 경우, 기존에 있던 refresh token은 blacklist가 된다.
+    'BLACKLIST_AFTER_ROTATION': True,
+    'TOKEN_USER_CLASS': 'user.User',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
