@@ -44,16 +44,54 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework.authtoken',
-    'rest_framework_simplejwt',
+
+    # 생성한 앱
+    'accountApp',
+    'users',
+
+    # django-rest-auth
+    'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+    # django-allauth
+    'allauth',
+    'allauth.account',
+
+    # 모델 생성 후 추가
+    'rest_framework.authtoken',
+    'django.contrib.sites',
+
 ]
 
+# 아래 추가
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
 }
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_ANONYMOUS_REDIRECT_URL = '/?verification=1'
+
+
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_USER_JWT = True
 
@@ -66,8 +104,9 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     # True로 설정될 경우, 기존에 있던 refresh token은 blacklist가 된다.
     'BLACKLIST_AFTER_ROTATION': True,
-    'TOKEN_USER_CLASS': 'user.User',
 }
+
+# 요기까지
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
