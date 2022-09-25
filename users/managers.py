@@ -1,5 +1,13 @@
+# username 대신 이메일 주소로 관리하기 위해서 커스터마이징 함
+"""
+serializers.py와 같은 역할..?
+"""
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
+
+"""
+create_user와 create_superuser 차이를 모르겠음
+"""
 
 class CustomUserManager(BaseUserManager):
 

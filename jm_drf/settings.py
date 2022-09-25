@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 생성한 앱
-    'accountApp',
+    'accountApp', # 삭제해야 하나..?
     'users',
 
     # django-rest-auth
@@ -59,14 +59,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
 
-    # 모델 생성 후 추가
+    # 모델 생성 후 추가 -> 일단 보류,,
     'rest_framework.authtoken',
     'django.contrib.sites',
 
 ]
 
 # 아래 추가
-
 AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
@@ -84,10 +83,11 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_ANONYMOUS_REDIRECT_URL = '/?verification=1'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# 위에 'mandatory'를 'none'으로 변경함 (일단 간단하게 해 보기 위함)
+# ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
+# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_ANONYMOUS_REDIRECT_URL = '/?verification=1'
 
 
 SITE_ID = 1

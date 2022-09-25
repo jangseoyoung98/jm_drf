@@ -9,8 +9,8 @@ urlpatterns = [
 
     path('users/', include('dj_rest_auth.urls')),
     path('users/', include('dj_rest_auth.registration.urls')),
-    path('users/', include('accountApp.urls')),
-    path('users/', include('allauth.urls')), # 이거 빼야 하나?
-    path('users-rest/registration/account-confirm-email/(?P<key>.+)/$', confirm_email, name='account_confirm_email'),
+    # path('users/', include('users.urls')), # 아직 users에서 url 만들기 전
+    path('users/', include('allauth.urls')),
+    # path('users-rest/registration/account-confirm-email/(?P<key>.+)/$', confirm_email, name='account_confirm_email'), -> 일단 이거 뺌,,
 
 ]

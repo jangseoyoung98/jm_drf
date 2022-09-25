@@ -13,9 +13,10 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
-
-    spouse_name = models.CharField(blank=True, max_length=100)
-    date_of_birth = models.DateField(blank=True, null=True)
+    
+    # 아래는 필요 없어서, 일단 패스
+    # spouse_name = models.CharField(blank=True, max_length=100)
+    # date_of_birth = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.email
